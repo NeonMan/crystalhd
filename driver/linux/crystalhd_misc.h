@@ -41,6 +41,11 @@
 /* forward declare */
 struct crystalhd_hw;
 
+/* Fix build issue with latest kernels */
+#ifndef rdtscll
+#define rdtscll(now)    do { (now) = rdtsc_ordered(); } while (0)
+#endif
+
 /* Global element pool for all Queue management.
  * TX: Active = BC_TX_LIST_CNT, Free = BC_TX_LIST_CNT.
  * RX: Free = BC_RX_LIST_CNT, Active = 2
